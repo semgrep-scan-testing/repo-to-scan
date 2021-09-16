@@ -27,7 +27,7 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.6
-      - uses: scribd/github-actions-datadog-reporting@v1
+      - uses: scribd/github-action-datadog-reporting@v1
         with:
           datadog-metric-prefix: 'github.action'
           metrics-type: 'job_metrics'
