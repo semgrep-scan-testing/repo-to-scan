@@ -18,3 +18,19 @@ jobs:
       with:
         auditOn: push
         publishToken: ${{ secrets.SEMGREP_APP_TOKEN }}
+  metrics:
+    needs: [semgrep]
+    runs-on: ubuntu-latest
+    name: Datadog reports
+    if: ${{ always() }}
+    steps:
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.6
+      - uses: scribd/github-actions-datadog-reporting@v1
+        with:
+          datadog-metric-prefix: 'github.action'
+          metrics-type: 'job_metrics'
+        env:
+          DATADOG_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          OCTOKIT_TOKEN: ${{ secrets.OKTOKIT_TOKEN }}
