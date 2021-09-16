@@ -33,4 +33,4 @@ jobs:
           metrics-type: 'job_metrics'
         env:
           DATADOG_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          OCTOKIT_TOKEN: ${{ secrets.OKTOKIT_TOKEN }}
+          OCTOKIT_TOKEN: ${{ secrets.OCTOKIT_TOKEN }}
