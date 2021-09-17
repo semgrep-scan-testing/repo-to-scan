@@ -21,16 +21,13 @@ jobs:
   metrics:
     needs: [semgrep]
     runs-on: ubuntu-latest
-    name: Datadog reports
+    name: Report logs to datadog
     if: ${{ always() }}
     steps:
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 2.6
-      - uses: scribd/github-action-datadog-reporting@v1
-        with:
-          datadog-metric-prefix: 'github.action'
-          metrics-type: 'job_metrics'
+      - uses: actions/setup-python@v2
+      - name: Install dependencies
+        run: python -m pip install PyGithub requests
+      - name: send metrics
+        run: python send_to_datadog.py ${{github.run_id}}
         env:
-          DATADOG_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          OCTOKIT_TOKEN: ${{ secrets.OCTOKIT_TOKEN }}
+          DD_API_KEY: ${{ secrets.DD_API_KEY }}
