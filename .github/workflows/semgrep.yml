@@ -28,6 +28,6 @@ jobs:
       - name: Install dependencies
         run: python -m pip install PyGithub requests
       - name: send metrics
-        run: python send_to_datadog.py ${{github.run_id}}
+        run: python ./send_to_datadog.py ${{github.run_id}}
         env:
           DD_API_KEY: ${{ secrets.DD_API_KEY }}
