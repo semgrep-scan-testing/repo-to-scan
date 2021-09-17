@@ -19,7 +19,7 @@ response = requests.post("https://api.datadoghq.com/api/v1/events",
               json={
                   "title": "github-actions-scan",
                   "text": text,
-                  "status": text,
+                  "alert_type": text,
               })
 
 print(response.status_code)
